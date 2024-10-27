@@ -145,3 +145,16 @@ h1{
     top: 0px;
     z-index: 2;
 }
+
+footer{
+    background-color: #434343;
+    border-radius: 20px 20px 0px 0px;
+    outline: 5px solid #fd997b;
+    justify-content: center;
+}
+
+footer p{
+    color: antiquewhite;
+    min-height: 0px;
+    margin: 0px;
+}
