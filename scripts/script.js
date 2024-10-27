@@ -1,7 +1,7 @@
 async function displayProjects() {
     try {
         console.log(window.Odometer);
-        const response = await fetch('/projects/projects.json');  
+        const response = await fetch('./projects.json');  
         const projectFolders = await response.json();
         const projectList = document.getElementById('projectList');
         projectList.innerHTML = '';
