@@ -7,7 +7,7 @@ async function displayProjects() {
         projectList.innerHTML = '';
 
         for (const project of projectFolders) {
-            const projectResponse = await fetch(`/projects/${project.folder}/project.json`);
+            const projectResponse = await fetch(`/projects/${project.folder.toLowerCase()}/project.json`);
             const projectData = await projectResponse.json();
             const projectItem = document.createElement('div');
             projectItem.classList.add('project-item');
