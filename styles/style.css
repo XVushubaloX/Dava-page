@@ -154,6 +154,10 @@ footer{
 }
 
 footer p{
+    text-align: center;
+    margin: 5px 0;
+    font-size: 24px;
+    font-weight: 500;
     color: antiquewhite;
     min-height: 0px;
     margin: 0px;
