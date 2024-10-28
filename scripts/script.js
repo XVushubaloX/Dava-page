@@ -8,7 +8,7 @@ async function displayProjects() {
         projectList.innerHTML = '';
 
         for (const project of projectFolders) {
-            const projectResponse = await fetch(`/projects/${project.folder.toLowerCase()}/project.json`);
+            const projectResponse = await fetch(`./projects/${project.folder.toLowerCase()}/project.json`);
             const projectData = await projectResponse.json();
             const projectItem = document.createElement('div');
             projectItem.classList.add('project-item');
@@ -45,7 +45,7 @@ async function displayProjects() {
                             viewButton.innerText = 'Open Project';
                             viewButton.classList.add('view-project-btn');
                             viewButton.addEventListener('click', () => {
-                                window.location.href = `/projects/${project.folder}/index.html`;
+                                window.location.href = `./projects/${project.folder}/index.html`;
                             });
                             projectItem.appendChild(viewButton);
 
@@ -62,7 +62,7 @@ async function displayProjects() {
                 viewButton.innerText = 'Open Project';
                 viewButton.classList.add('view-project-btn');
                 viewButton.addEventListener('click', () => {
-                    window.location.href = `/projects/${project.folder}/index.html`;
+                    window.location.href = `./projects/${project.folder}/index.html`;
                 });
                 projectItem.appendChild(viewButton);
             }
