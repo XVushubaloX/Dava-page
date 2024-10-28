@@ -20,7 +20,7 @@ async function displayProjects() {
                 let clicksRemaining = projectData.lockPower;
                 const lockText = document.createElement('p');
                 lockText.classList.add('lock-text', 'odometer');
-                lockText.innerText = clicksRemaining; // Set initial value
+                lockText.innerText = clicksRemaining;
 
                 const odometer = new Odometer({
                     el: lockText,
@@ -89,7 +89,7 @@ function animateOnScroll() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             } else {
-                entry.target.classList.remove('visible'); // Remove the class when not intersecting
+                entry.target.classList.remove('visible');
             }
         });
     }, { threshold: 0.700 });
