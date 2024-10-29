@@ -1,14 +1,14 @@
 [
     {
         "folder": "project",
-        "name": "Sophie Brittain",
-        "description": "A freelance product designer in New York",
-        "lockPower": 5
+        "name": "Моя маленька Батьківщина",
+        "description": "Проект в якому я розповідаю про рідне місто",
+        "lockPower": 2
     },
     {
-        "folder": "project",
-        "name": "Sophie Brittain",
-        "description": "A freelance product designer in New York",
-        "lockPower": 5
+        "folder": "-",
+        "name": "В розробці",
+        "description": "",
+        "lockPower": 99999
     }
 ]
