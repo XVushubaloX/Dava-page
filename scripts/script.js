@@ -79,7 +79,7 @@ function animateOnScroll() {
         entries.forEach(entry => {
             entry.target.classList.toggle('visible', entry.isIntersecting);
         });
-    }, { threshold: 0.7 });
+    }, { threshold: 0.2 });
 
     projectItems.forEach(item => observer.observe(item));
 }
