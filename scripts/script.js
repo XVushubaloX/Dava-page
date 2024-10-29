@@ -37,10 +37,12 @@ async function displayProjects() {
                             odometer.update(clicksRemaining);
                         } else {
                             lockText.remove();
+                            projectItem.classList.add('unlocked');
+                        
                             const description = document.createElement('p');
                             description.innerText = projectData.description;
                             projectItem.appendChild(description);
-
+                        
                             const viewButton = document.createElement('button');
                             viewButton.innerText = 'Open Project';
                             viewButton.classList.add('view-project-btn');
@@ -48,7 +50,7 @@ async function displayProjects() {
                                 window.location.href = `./projects/${project.folder}/index.html`;
                             });
                             projectItem.appendChild(viewButton);
-
+                        
                             unlocked = true;
                         }
                     }

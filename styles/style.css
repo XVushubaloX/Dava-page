@@ -63,7 +63,9 @@ h1{
     user-select: none;
     max-width: calc(45% - 20px);
     min-width: 90%;
-    min-height: 200px;
+    min-height: 160px;
+    max-height:  160px;
+    overflow: hidden;
     margin: 10px;
     padding: 20px 20px 10px;
     box-shadow: 0 8px 24px rgba(221, 163, 102, 0.2);
@@ -72,8 +74,11 @@ h1{
     cursor: pointer;
     transition: all 0.3s ease;
     opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease, ;
-    
+    transition: opacity 0.5s ease, transform 0.5s ease, max-height 1s ease;    
+}
+
+.project-item.unlocked {
+    max-height: 1000px;
 }
 
 .project-item:hover{
@@ -110,7 +115,8 @@ h1{
 
 .project-item p{
     transition: all 0.3s ease;
-    margin: 5px 0;
+    margin-top: 40px;
+    margin-bottom: 5px;
     font-weight: 500;
     color: antiquewhite;
 }
