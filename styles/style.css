@@ -96,10 +96,12 @@ p{
 
 .project-item:hover h3{
     color: #c6b49c;
+    transition: all 0.3s ease;
 }
 
 .project-item:hover p{
     color: #c6b49c;
+    transition: all 0.3s ease;
 }
 
 
@@ -147,7 +149,7 @@ p{
 }
 
 .view-project-btn:hover{
-    background-color: #cd7054;
+    background-color: #c06448;
     color: #bcb0a1;
 }
 
