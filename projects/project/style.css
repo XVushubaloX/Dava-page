@@ -27,6 +27,7 @@ footer p{
 header{
     user-select: none;
     text-align: center;
+    margin: 0px;
 }
 
 .logo-background{
