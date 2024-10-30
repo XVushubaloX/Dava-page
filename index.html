@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="styles/odometer.css" />
     <script type="text/javascript" src="scripts/odometer.js"></script>
     <link rel="icon" href="./favicon.ico">
-    <title>Dava site</title>
+    <title>CiKlovinka</title>
 </head>
 
 <body>
 
     <header class="sticky-element">
         <div class="logo-background">
-            <div class="logo" onclick="document.location.href = `./index.html` ">
+            <div class="logo" id="logo">
                 <h3 class="logo-text">CiKlovinka</h3>
             </div>
         </div>
@@ -31,3 +31,5 @@
 </body>
 
 </html>
+
+<script> document.getElementById("logo").addEventListener("click", function() {window.location.href = `/`}); </script>
