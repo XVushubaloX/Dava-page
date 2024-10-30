@@ -8,7 +8,7 @@
 }
 
 body{
-    background-color: #181818;
+    background-color: antiquewhite;
 }
 
 header{
@@ -76,12 +76,12 @@ p{
     margin: 10px;
     padding: 20px 20px 10px;
     box-shadow: 0 8px 24px rgba(221, 163, 102, 0.2);
-    background-color: #424242;
+    background-color: rgb(255, 251, 246);
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease, max-height 1s ease;    
+    transition: opacity 0.5s ease, transform 0.5s ease, max-height 1s ease, background-color 0.5s ease;    
 }
 
 .project-item.unlocked {
@@ -91,16 +91,16 @@ p{
 .project-item:hover{
     transform: scale(0.985);
     box-shadow: 0 0px 0px rgba(149, 157, 165, 0.2);
-    background-color: #292929;
+    background-color: #dac8af;
 }
 
 .project-item:hover h3{
-    color: #c6b49c;
+    color: #000000;
     transition: all 0.3s ease;
 }
 
 .project-item:hover p{
-    color: #c6b49c;
+    color: #000000;
     transition: all 0.3s ease;
 }
 
@@ -114,12 +114,12 @@ p{
     margin: 10px 0;
     font-size: 27px;
     font-weight: 600;
-    color: antiquewhite;
+    color: #0b0b0b;
 }
 
 .lock-text {
     font-size: 50px;
-    color: antiquewhite;
+    color: #0b0b0b;
 }
 
 .project-item p{
@@ -127,7 +127,7 @@ p{
     margin-top: 40px;
     margin-bottom: 5px;
     font-weight: 500;
-    color: antiquewhite;
+    color: #0b0b0b;
 }
 
 .project-details-content{
