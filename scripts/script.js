@@ -43,6 +43,7 @@ function setupLockMechanism(projectItem, projectData) {
             clicksRemaining--;
             lockText.innerText = clicksRemaining;
             if (clicksRemaining === 0) {
+                lockText.remove();
                 unlockProject(projectItem, projectData);
             }
         }
