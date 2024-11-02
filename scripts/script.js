@@ -1,4 +1,9 @@
 async function displayProjects() {
+    document.getElementById("logo").addEventListener("click", function() {
+        window.location.href = `./index.html`;
+        deleteAllCookies();
+    });
+
     try {
         const response = await fetch('./projects.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -24,6 +29,10 @@ function createProjectItem(projectData) {
     projectItem.classList.add('project-item');
     projectItem.innerHTML = `<h3>${projectData.name}</h3>`;
 
+    if(getCookie(projectData.folder) != undefined){
+        projectData.lockPower = getCookie(projectData.folder);
+    }
+
     if (projectData.lockPower && projectData.lockPower > 1) {
         setupLockMechanism(projectItem, projectData);
     } else {
@@ -42,6 +51,8 @@ function setupLockMechanism(projectItem, projectData) {
         if (clicksRemaining > 0) {
             clicksRemaining--;
             lockText.innerText = clicksRemaining;
+            document.cookie = `${projectData.folder}=${clicksRemaining}; expires=Fri, 31 Dec 2026 23:59:59 UTC; path=/`;
+            console.log(getCookie(projectData.folder))
             if (clicksRemaining === 0) {
                 lockText.remove();
                 unlockProject(projectItem, projectData);
@@ -59,11 +70,11 @@ function createLockText(clicksRemaining) {
 }
 
 function unlockProject(projectItem, projectData) {
-    projectItem.classList.add('unlocked');
     appendProjectDetails(projectItem, projectData);
 }
 
 function appendProjectDetails(projectItem, projectData) {
+    projectItem.classList.add('unlocked');
     const description = document.createElement('p');
     description.innerText = projectData.description;
     projectItem.appendChild(description);
@@ -87,5 +98,24 @@ function animateOnScroll() {
 
     projectItems.forEach(item => observer.observe(item));
 }
+
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function deleteAllCookies() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+    }
+}
+
 
 window.addEventListener('load', displayProjects);
