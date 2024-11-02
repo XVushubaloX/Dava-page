@@ -106,6 +106,9 @@ p{
     transition: all 0.3s ease;
 }
 
+.project-item:hover .project-image{
+    filter: brightness(80%);
+}
 
 .project-item.visible {
     transform: translateX(0px);
@@ -136,6 +139,11 @@ p{
 .project-details-content{
     overflow-y: auto;
     max-height: 70vh;
+}
+
+.project-image{
+    border-radius: 15px;
+    transition: all 0.5s;
 }
 
 .view-project-btn{

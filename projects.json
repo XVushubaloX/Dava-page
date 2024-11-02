@@ -3,12 +3,14 @@
         "folder": "project",
         "name": "Моя маленька Батьківщина",
         "description": "Проект в якому я розповідаю про рідне місто",
+        "hasImage": true,
         "lockPower": 2
     },
     {
         "folder": "-",
         "name": "В розробці",
         "description": "",
+        "hasImage": false,
         "lockPower": 99999
     }
 ]

@@ -52,7 +52,6 @@ function setupLockMechanism(projectItem, projectData) {
             clicksRemaining--;
             lockText.innerText = clicksRemaining;
             document.cookie = `${projectData.folder}=${clicksRemaining}; expires=Fri, 31 Dec 2026 23:59:59 UTC; path=/`;
-            console.log(getCookie(projectData.folder))
             if (clicksRemaining === 0) {
                 lockText.remove();
                 unlockProject(projectItem, projectData);
@@ -74,6 +73,14 @@ function unlockProject(projectItem, projectData) {
 }
 
 function appendProjectDetails(projectItem, projectData) {
+    if(projectData.hasImage){
+        const image = document.createElement('img');
+        image.src = `./projects/${projectData.folder}/image.png`
+        image.classList.add('project-image');
+        projectItem.appendChild(image);
+        projectItem.appendChild(document.createElement('br'));
+    }
+
     projectItem.classList.add('unlocked');
     const description = document.createElement('p');
     description.innerText = projectData.description;
