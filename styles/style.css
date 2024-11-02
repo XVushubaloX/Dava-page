@@ -82,7 +82,8 @@ p{
     cursor: pointer;
     transition: all 0.5s ease;
     opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease, max-height 1s ease, background-color 0.5s ease;    
+    transition: opacity 0.5s ease, transform 0.5s ease, max-height 1s ease, background-color 0.5s ease;  
+    transform: translateX(100px);  
 }
 
 .project-item.unlocked {
@@ -107,6 +108,7 @@ p{
 
 
 .project-item.visible {
+    transform: translateX(0px);
     opacity: 1;
 }
 
