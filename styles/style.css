@@ -67,12 +67,13 @@ p{
 .project-item {
     text-align: center;
     user-select: none;
-    min-width: 90%;
+    width: 90%;
+    max-width: 1000px;
     min-height: 170px;
     max-height: 170px;
     overflow: hidden;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 20px 20px 10px;
@@ -144,6 +145,9 @@ p{
 .project-image{
     border-radius: 15px;
     transition: all 0.5s;
+    height: auto;
+    width: 85%;
+    max-width: 400px;
 }
 
 .view-project-btn{
