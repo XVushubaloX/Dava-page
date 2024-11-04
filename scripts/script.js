@@ -1,21 +1,22 @@
 async function displayProjects() {
-    document.getElementById("logo").addEventListener("click", function() {
-        window.location.href = `./index.html`;
+    document.getElementById("logo").addEventListener("click", () => {
         deleteAllCookies();
+        window.location.href = './index.html';
     });
+
+    const projectList = document.getElementById('projectList');
+    projectList.innerHTML = ''; // Clear existing content
 
     try {
         const response = await fetch('./projects.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        const projectFolders = await response.json();
-        const projectList = document.getElementById('projectList');
-        projectList.innerHTML = '';
 
-        for (const project of projectFolders) {
+        const projectFolders = await response.json();
+
+        projectFolders.forEach(project => {
             const projectItem = createProjectItem(project);
             projectList.appendChild(projectItem);
-        }
+        });
     } catch (error) {
         console.error('Error fetching projects:', error);
         projectList.innerHTML = '<p>Error loading projects. Please try again later.</p>';
@@ -26,14 +27,13 @@ async function displayProjects() {
 
 function createProjectItem(projectData) {
     const projectItem = document.createElement('div');
-    projectItem.classList.add('project-item');
+    projectItem.className = 'project-item';
     projectItem.innerHTML = `<h3>${projectData.name}</h3>`;
+    
+    const lockPower = getCookie(projectData.folder);
+    projectData.lockPower = lockPower !== undefined ? lockPower : 0;
 
-    if(getCookie(projectData.folder) != undefined){
-        projectData.lockPower = getCookie(projectData.folder);
-    }
-
-    if (projectData.lockPower && projectData.lockPower > 1) {
+    if (projectData.lockPower > 1) {
         setupLockMechanism(projectItem, projectData);
     } else {
         appendProjectDetails(projectItem, projectData);
@@ -47,22 +47,25 @@ function setupLockMechanism(projectItem, projectData) {
     const lockText = createLockText(clicksRemaining);
     projectItem.appendChild(lockText);
 
-    projectItem.addEventListener('click', () => {
-        if (clicksRemaining > 0) {
-            clicksRemaining--;
-            lockText.innerText = clicksRemaining;
-            document.cookie = `${projectData.folder}=${clicksRemaining}; expires=Fri, 31 Dec 2026 23:59:59 UTC; path=/`;
-            if (clicksRemaining === 0) {
-                lockText.remove();
-                unlockProject(projectItem, projectData);
-            }
+    projectItem.addEventListener('click', () => handleProjectClick(projectItem, projectData, lockText));
+}
+
+function handleProjectClick(projectItem, projectData, lockText) {
+    if (projectData.lockPower > 0) {
+        projectData.lockPower--;
+        lockText.innerText = projectData.lockPower;
+        document.cookie = `${projectData.folder}=${projectData.lockPower}; expires=Fri, 31 Dec 2026 23:59:59 UTC; path=/`;
+
+        if (projectData.lockPower === 0) {
+            lockText.remove();
+            unlockProject(projectItem, projectData);
         }
-    });
+    }
 }
 
 function createLockText(clicksRemaining) {
     const lockText = document.createElement('p');
-    lockText.classList.add('lock-text', 'odometer');
+    lockText.className = 'lock-text odometer';
     lockText.innerText = clicksRemaining;
     new Odometer({ el: lockText, value: clicksRemaining, format: 'd' });
     return lockText;
@@ -73,25 +76,26 @@ function unlockProject(projectItem, projectData) {
 }
 
 function appendProjectDetails(projectItem, projectData) {
-    if(projectData.hasImage){
+    if (projectData.hasImage) {
         const image = document.createElement('img');
-        image.src = `./projects/${projectData.folder}/image.png`
-        image.classList.add('project-image');
+        image.src = `./projects/${projectData.folder}/image.png`;
+        image.className = 'project-image';
         projectItem.appendChild(image);
         projectItem.appendChild(document.createElement('br'));
     }
 
     projectItem.classList.add('unlocked');
+    
     const description = document.createElement('p');
     description.innerText = projectData.description;
     projectItem.appendChild(description);
 
     const viewButton = document.createElement('button');
     viewButton.innerText = 'Open Project';
-    viewButton.classList.add('view-project-btn');
-    viewButton.addEventListener('click', () => {
+    viewButton.className = 'view-project-btn';
+    viewButton.onclick = () => {
         window.location.href = `./projects/${projectData.folder}/index.html`;
-    });
+    };
     projectItem.appendChild(viewButton);
 }
 
@@ -107,22 +111,18 @@ function animateOnScroll() {
 }
 
 function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
+    const matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
 function deleteAllCookies() {
-    const cookies = document.cookie.split(";");
-
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
+    document.cookie.split(";").forEach(cookie => {
         const eqPos = cookie.indexOf("=");
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
-    }
+    });
 }
-
 
 window.addEventListener('load', displayProjects);
